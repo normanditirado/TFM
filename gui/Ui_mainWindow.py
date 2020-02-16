@@ -65,7 +65,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Thermal Comfort 1.0"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Thermal Comfort"))
         self.pushButton.setText(_translate("MainWindow", "Say Hello"))
         self.menuArchivo.setTitle(_translate("MainWindow", "Archivo"))
         self.menuAyuda.setTitle(_translate("MainWindow", "Ayuda"))
