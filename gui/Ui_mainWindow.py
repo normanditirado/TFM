@@ -69,7 +69,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Say Hello"))
         self.menuArchivo.setTitle(_translate("MainWindow", "Archivo"))
         self.menuAyuda.setTitle(_translate("MainWindow", "Ayuda"))
-        self.actionAcerca_de.setText(_translate("MainWindow", "Acerca de"))
+        self.actionAcerca_de.setText(_translate("MainWindow", "Ayuda"))
         self.actionTomar_fotos.setText(_translate("MainWindow", "Tomar fotos"))
         self.actionCargar_fotos.setText(_translate("MainWindow", "Cargar fotos"))
 
