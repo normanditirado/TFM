@@ -41,6 +41,7 @@ class Ui_MainWindow(object):
         self.actionAcerca_de.setObjectName("actionAcerca_de")
         self.actionTomar_fotos = QtWidgets.QAction(MainWindow)
         self.actionTomar_fotos.setObjectName("actionTomar_fotos")
+        self.actionTomar_fotos.triggered.connect(self.takePhotos)
         self.actionCargar_fotos = QtWidgets.QAction(MainWindow)
         self.actionCargar_fotos.setObjectName("actionCargar_fotos")
         self.menuArchivo.addAction(self.actionTomar_fotos)
@@ -81,7 +82,6 @@ class Ui_MainWindow(object):
         Dialog.show()
 
     def takePhotos(self):
-        print('Hello')
         key = cv2. waitKey(1)
         webcam = cv2.VideoCapture(0)
         i = 0
