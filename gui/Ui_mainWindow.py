@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Ui_aboutDialog import *
+import cv2
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -78,10 +79,43 @@ class Ui_MainWindow(object):
         ui = Ui_Dialog()
         ui.setupUi(Dialog)
         Dialog.show()
-       
 
-   
+    def takePhotos(self):
+        print('Hello')
+        key = cv2. waitKey(1)
+        webcam = cv2.VideoCapture(0)
+        i = 0
+        while True:
+            try:
+                check, frame = webcam.read()
+                print(check) #prints true as long as the webcam is running
+                print(frame) #prints matrix values of each framecd
+                cv2.imshow("Capturing Image", frame) 
+                key = cv2.waitKey(1)
+                if key == ord('s'):
+                    cv2.imwrite('saved_img'+str(i)+'.jpg', frame)
+                    i += 1
+                elif key == ord('q'):
+                    print("Turning off camera.")
+                    webcam.release()
+                    print("Camera off.")
+                    print("Program ended.")
+                    cv2.destroyAllWindows()
+                    break
+            except(KeyboardInterrupt):
+                print("Turning off camera.")
+                webcam.release()
+                print("Camera off.")
+                print("Program ended.")
+                cv2.destroyAllWindows()
+                break
+        print("Turning off camera.")
+        webcam.release()
+        print("Camera off.")
+        print("Program ended.")
+        cv2.destroyAllWindows()
 
+      
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
