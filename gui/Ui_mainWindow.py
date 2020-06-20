@@ -8,7 +8,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QDialog,  QMainWindow
 from Ui_aboutDialog import *
+from Ui_datesDialog import *
 import cv2
 
 class Ui_MainWindow(object):
@@ -76,10 +78,11 @@ class Ui_MainWindow(object):
         self.actionCargar_fotos.setText(_translate("MainWindow", "Cargar fotos"))
 
     def showAbout(self):
-        Dialog = QtWidgets.QDialog()
-        ui = Ui_Dialog()
-        ui.setupUi(Dialog)
-        Dialog.show()
+        print('It works calling showAbout')
+        dialog = Dialog(MainWindow)
+        ui = Ui_datesDialog()
+        ui.setupUi(dialog)
+        dialog.show()
 
     def takePhotos(self):
         key = cv2. waitKey(1)
@@ -114,6 +117,11 @@ class Ui_MainWindow(object):
         print("Camera off.")
         print("Program ended.")
         cv2.destroyAllWindows()
+
+class Dialog(QDialog):
+    def __init__(self, *args, **kwargs):
+        super(Dialog, self).__init__(*args, **kwargs)
+
 
       
 if __name__ == "__main__":
