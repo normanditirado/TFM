@@ -8,7 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDialog,  QMainWindow
+from PyQt5.QtWidgets import QDialog,  QMainWindow, QAction
+from PyQt5.QtGui import QIcon
 from Ui_aboutDialog import *
 from Ui_datesDialog import *
 import cv2
@@ -49,12 +50,16 @@ class Ui_MainWindow(object):
         self.menuArchivo.addAction(self.actionTomar_fotos)
         self.menuArchivo.addSeparator()
         self.menuArchivo.addAction(self.actionCargar_fotos)
+        self.actionAcerca_de = QAction(QIcon('ojo.png'), 'Ayuda', MainWindow)
+        self.actionAcerca_de.setShortcut('Ctrl+Q')
+        self.actionAcerca_de.setStatusTip('Muestra la ayuda')
+        self.actionAcerca_de.triggered.connect(self.showHelp)
         self.menuAyuda.addAction(self.actionAcerca_de)
         self.menubar.addAction(self.menuArchivo.menuAction())
         self.menubar.addAction(self.menuAyuda.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.pushButton.clicked.connect(self.showAbout)
+        self.pushButton.clicked.connect(self.selectDateRange)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         data = {
         'Imagen':['20190219-18h00','20190219-18h05','20190219-18h10'], '% procesamiento':['100%','80%','0%']}
@@ -77,12 +82,20 @@ class Ui_MainWindow(object):
         self.actionTomar_fotos.setText(_translate("MainWindow", "Tomar fotos"))
         self.actionCargar_fotos.setText(_translate("MainWindow", "Cargar fotos"))
 
-    def showAbout(self):
-        print('It works calling showAbout')
+    def selectDateRange(self):
+        print('Calling selectDateRange>>>>')
         dialog = Dialog(MainWindow)
         ui = Ui_datesDialog()
         ui.setupUi(dialog)
         dialog.show()
+    
+    def showHelp(self):
+        print('Calling showHelp>>>>>>>>>>>>')
+        dialog = Dialog(MainWindow)
+        about = Ui_Dialog()
+        about.setupUi(dialog)
+        dialog.show()
+
 
     def takePhotos(self):
         key = cv2. waitKey(1)
