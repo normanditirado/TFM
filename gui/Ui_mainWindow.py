@@ -9,10 +9,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog,  QMainWindow, QAction
+from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QIcon
 from Ui_aboutDialog import *
 from Ui_datesDialog import *
 import cv2
+import os
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -47,7 +49,7 @@ class Ui_MainWindow(object):
         self.actionTomar_fotos.triggered.connect(self.takePhotos)
         self.actionCargar_fotos = QtWidgets.QAction(MainWindow)
         self.actionCargar_fotos.setObjectName("actionCargar_fotos")
-        self.actionCargar_fotos = QAction(QIcon('ojo.png'), 'Cargar fotos', MainWindow)
+        self.actionCargar_fotos = QAction('Cargar fotos', MainWindow)
         self.actionCargar_fotos.setShortcut('Ctrl+L')
         self.actionCargar_fotos.setStatusTip('Seleccionar las fotos a cargar')
         self.actionCargar_fotos.triggered.connect(self.selectDateRange)
@@ -92,6 +94,15 @@ class Ui_MainWindow(object):
         ui = Ui_datesDialog()
         ui.setupUi(dialog)
         dialog.show()
+        rsp = dialog.exec_()
+        if rsp == QtWidgets.QDialog.Accepted:
+            print('OK was pressed')
+            print(ui.getSelectedDate())
+            files = self.readDirectory(ui.getSelectedDate())
+            self.loadNamesOfImagesFromDirectory(files)
+
+        if rsp == QtWidgets.QDialog.Rejected:
+            print('Cancel was pressed')
     
     def showHelp(self):
         print('Calling showHelp>>>>>>>>>>>>')
@@ -99,6 +110,32 @@ class Ui_MainWindow(object):
         about = Ui_Dialog()
         about.setupUi(dialog)
         dialog.show()
+        rsp = dialog.exec_()
+    
+    def readDirectory(self, date):
+        files = os.listdir('C:\\Users\\Normandi\\Desktop\\images')
+        filteredFiles = []
+        day = date.day()
+        month = date.month()
+        year = date.year()
+        patternOfSearch = ""
+        patternOfSearch += str(year) + str(month) + str(day)
+        print('Displaying patternOfSearch: ' + patternOfSearch)
+        for item in files:
+            if patternOfSearch in item:
+                filteredFiles.append(item)
+        print('Displaying filtered files:')
+        print(filteredFiles)
+        return filteredFiles
+
+    def loadNamesOfImagesFromDirectory(self, images):
+        i = 0
+        for item in images:
+            currentImageName = QtWidgets.QTableWidgetItem(item)
+            self.photosTableWidget.setItem(i, 0, currentImageName)
+            i+=1
+
+
 
 
     def takePhotos(self):
@@ -138,7 +175,7 @@ class Ui_MainWindow(object):
 class Dialog(QDialog):
     def __init__(self, *args, **kwargs):
         super(Dialog, self).__init__(*args, **kwargs)
-
+ 
 
       
 if __name__ == "__main__":
