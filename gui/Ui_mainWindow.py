@@ -65,7 +65,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuAyuda.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.pushButton.clicked.connect(self.selectDateRange)
+        self.pushButton.clicked.connect(self.getDataFromSelectedRow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         data = {
         'Imagen':['20190219-18h00','20190219-18h05','20190219-18h10'], '% procesamiento':['100%','80%','0%']}
@@ -134,6 +134,14 @@ class Ui_MainWindow(object):
             currentImageName = QtWidgets.QTableWidgetItem(item)
             self.photosTableWidget.setItem(i, 0, currentImageName)
             i+=1
+
+    def getDataFromSelectedRow(self):
+        selectedRow = self.photosTableWidget.currentRow()
+        print('Displaying selected row>>>>>')
+        print(selectedRow)
+        imageName = self.photosTableWidget.item(selectedRow, 0).text()
+        percentage = self.photosTableWidget.item(selectedRow, 1).text()
+        print(imageName + " " + percentage)
 
 
 
