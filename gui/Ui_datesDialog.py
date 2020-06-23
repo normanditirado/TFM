@@ -59,6 +59,9 @@ class Ui_datesDialog(object):
        date = self.dateEdit.date()
        self.calendarWidget.setSelectedDate(date)
 
+    def getSelectedDate(self):
+        return self.dateEdit.date()
+
 
 
 if __name__ == "__main__":

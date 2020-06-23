@@ -90,8 +90,8 @@ def printImage(imageProcessed):
         print('<<')
         print('Label: ' + currentObject.getLabel() + ' Confidence: ' + str(currentObject.getConfidence()) +' Topleft>> X: ' + str(currentObject.getTopLeftX()) + ' Y: ' + str(currentObject.getTopLeftY()) + ' BottomRight X: ' + str(currentObject.getBottomRightX()) + ' Y: ' + str(currentObject.getBottomRightY()) + ' CenterX: ' + str(currentObject.getCenterX()) + ' CenterY: ' + str(currentObject.getCenterY()))
 
-
-
+# Returns an array of activities from the objects
+# def getActivities(objects):
 
 
 # testing
