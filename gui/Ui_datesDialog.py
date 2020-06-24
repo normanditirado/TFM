@@ -10,8 +10,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QDate, QDateTime
 
-
-
 class Ui_datesDialog(object):
     def setupUi(self, datesDialog):
         datesDialog.setObjectName("datesDialog")
@@ -54,8 +52,6 @@ class Ui_datesDialog(object):
         self.dateEdit.setDate(self.calendarWidget.selectedDate())
     
     def changeDateInCalendar(self):
-       # day = self.dateEdit.dateTime.
-       # month =
        date = self.dateEdit.date()
        self.calendarWidget.setSelectedDate(date)
 

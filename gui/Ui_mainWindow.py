@@ -13,13 +13,15 @@ from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QIcon
 from Ui_aboutDialog import *
 from Ui_datesDialog import *
+from Ui_analysis import *
+
 import cv2
 import os
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.setFixedSize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
@@ -81,7 +83,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Thermal Comfort 1.2"))
-        self.pushButton.setText(_translate("MainWindow", "Say Hello"))
+        self.pushButton.setText(_translate("MainWindow", "Aceptar"))
         self.menuArchivo.setTitle(_translate("MainWindow", "Archivo"))
         self.menuAyuda.setTitle(_translate("MainWindow", "Ayuda"))
         self.actionAcerca_de.setText(_translate("MainWindow", "Ayuda"))
@@ -118,6 +120,7 @@ class Ui_MainWindow(object):
         day = date.day()
         month = date.month()
         year = date.year()
+        
         patternOfSearch = ""
         patternOfSearch += str(year) + str(month) + str(day)
         print('Displaying patternOfSearch: ' + patternOfSearch)
@@ -141,10 +144,7 @@ class Ui_MainWindow(object):
         print(selectedRow)
         imageName = self.photosTableWidget.item(selectedRow, 0).text()
         percentage = self.photosTableWidget.item(selectedRow, 1).text()
-        print(imageName + " " + percentage)
-
-
-
+        self.showResultAnalysis(imageName)
 
     def takePhotos(self):
         key = cv2. waitKey(1)
@@ -179,6 +179,15 @@ class Ui_MainWindow(object):
         print("Camera off.")
         print("Program ended.")
         cv2.destroyAllWindows()
+
+    def showResultAnalysis(self, imageName):
+        print('Calling showResultAnalysis>>>>>>>>>>>>')
+        dialog = Dialog(MainWindow)
+        about = Ui_Dialog()
+        about.setupUi(dialog)
+        about.setImage(imageName)
+        dialog.show()
+        
 
 class Dialog(QDialog):
     def __init__(self, *args, **kwargs):

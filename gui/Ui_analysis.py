@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap
-
+#from Ui_mainWindow import *
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -60,7 +60,20 @@ class Ui_Dialog(object):
 
         pixmapprocess= QPixmap('202062255.jpg').scaled(201,121)
         self.processedImagenLabel.setPixmap(pixmapprocess)
-        
+
+    
+    def setImage(self, imageName):
+        originalImagesDirectory = 'C:\\Users\\Normandi\\Desktop\\images'
+        processedImagesDirectory ='C:\\Users\\Normandi\\Desktop\\processedImages'
+        self.imageName = imageName
+        original = ''
+        original += originalImagesDirectory +'\\' + imageName
+        processed = ''
+        processed += processedImagesDirectory + '\\' + imageName
+        pixmaporig= QPixmap(original).scaled(201,121)
+        self.originalImageLabel.setPixmap(pixmaporig)
+        pixmapprocess= QPixmap(processed).scaled(201,121)
+        self.processedImagenLabel.setPixmap(pixmapprocess)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
