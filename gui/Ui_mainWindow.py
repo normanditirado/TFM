@@ -6,7 +6,6 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog,  QMainWindow, QAction
 from PyQt5.QtCore import QDate
@@ -25,13 +24,19 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(130, 340, 75, 23))
+        self.pushButton.setGeometry(QtCore.QRect(160, 310, 75, 23))
         self.pushButton.setObjectName("pushButton")
+        
         self.photosTableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.photosTableWidget.setGeometry(QtCore.QRect(20, 40, 551, 251))
+        self.photosTableWidget.setGeometry(QtCore.QRect(90, 30, 351, 251))
         self.photosTableWidget.setObjectName("photosTableWidget")
         self.photosTableWidget.setColumnCount(2)
-        self.photosTableWidget.setRowCount(3)
+        self.photosTableWidget.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.photosTableWidget.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.photosTableWidget.setHorizontalHeaderItem(1, item)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -65,11 +70,11 @@ class Ui_MainWindow(object):
         self.menuAyuda.addAction(self.actionAcerca_de)
         self.menubar.addAction(self.menuArchivo.menuAction())
         self.menubar.addAction(self.menuAyuda.menuAction())
-
         self.retranslateUi(MainWindow)
         self.pushButton.clicked.connect(self.getDataFromSelectedRow)
+        
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        data = {
+        ''' data = {
         'Imagen':['20190219-18h00','20190219-18h05','20190219-18h10'], '% procesamiento':['100%','80%','0%']}
         horHeaders = []
         for n, key in enumerate(data.keys()):
@@ -78,12 +83,16 @@ class Ui_MainWindow(object):
                 newitem = QtWidgets.QTableWidgetItem(item)
                 self.photosTableWidget.setItem(m, n, newitem)
         self.photosTableWidget.setHorizontalHeaderLabels(horHeaders)
-        self.photosTableWidget.show()
+        self.photosTableWidget.show() '''
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Thermal Comfort 1.2"))
         self.pushButton.setText(_translate("MainWindow", "Aceptar"))
+        item = self.photosTableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Imagen Name"))
+        item = self.photosTableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "% Processing"))
         self.menuArchivo.setTitle(_translate("MainWindow", "Archivo"))
         self.menuAyuda.setTitle(_translate("MainWindow", "Ayuda"))
         self.actionAcerca_de.setText(_translate("MainWindow", "Ayuda"))
@@ -124,11 +133,16 @@ class Ui_MainWindow(object):
         patternOfSearch = ""
         patternOfSearch += str(year) + str(month) + str(day)
         print('Displaying patternOfSearch: ' + patternOfSearch)
+        cont=0
         for item in files:
             if patternOfSearch in item:
                 filteredFiles.append(item)
+                cont +=1
+                
+        self.photosTableWidget.setRowCount(cont)
         print('Displaying filtered files:')
         print(filteredFiles)
+                
         return filteredFiles
 
     def loadNamesOfImagesFromDirectory(self, images):
@@ -143,7 +157,7 @@ class Ui_MainWindow(object):
         print('Displaying selected row>>>>>')
         print(selectedRow)
         imageName = self.photosTableWidget.item(selectedRow, 0).text()
-        percentage = self.photosTableWidget.item(selectedRow, 1).text()
+        #percentage = self.photosTableWidget.item(selectedRow, 1).text()
         self.showResultAnalysis(imageName)
 
     def takePhotos(self):
@@ -193,8 +207,7 @@ class Dialog(QDialog):
     def __init__(self, *args, **kwargs):
         super(Dialog, self).__init__(*args, **kwargs)
  
-
-      
+     
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

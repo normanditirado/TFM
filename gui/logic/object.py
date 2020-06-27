@@ -1,4 +1,4 @@
-import enum
+from enum import Enum
 class ObjectDetected:
 
     def __init__(self, label, topLeftX, topLeftY, bottomRightX, bottomRightY, confidence):
@@ -8,6 +8,20 @@ class ObjectDetected:
         self.bottomRightX = bottomRightX
         self.bottomRightY = bottomRightY
         self.confidence = confidence
+        if label == 'person':
+            self.object = Object.person
+        elif (label == 'chair'):
+            self.object = Object.chair
+        elif (label == 'sofa'):
+            self.object = Object.sofa
+        elif (label == 'book'):
+            self.object = Object.book
+        elif (label == 'laptop'):
+            self.object = Object.laptop
+        elif (label == 'tvmonitor'):
+            self.object = Object.tvmonitor
+        else:
+            self.object = Object.keyboard
 
     def getLabel(self):
         return self.label
@@ -53,8 +67,11 @@ class ObjectDetected:
     def setConfidence(self, confidence):
         self.confidence = confidence
 
+    def getObject(self):
+        return self.object
 
-class Object(enum.Enum):
+
+class Object(Enum):
     person = 1
     chair = 2
     sofa = 3

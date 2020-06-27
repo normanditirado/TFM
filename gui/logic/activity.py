@@ -8,5 +8,6 @@ class Activity(enum.Enum):
     archive = 1.4
     walking = 1.7
     packing = 2.1
+    other = 0
 
   

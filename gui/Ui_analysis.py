@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap
-#from Ui_mainWindow import *
+from detection import Detection
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -38,11 +38,11 @@ class Ui_Dialog(object):
         item = QtWidgets.QTableWidgetItem()
         self.ResultTableWidget.setHorizontalHeaderItem(1, item)
         
-        self.processedImagenLabel = QtWidgets.QLabel(Dialog)
-        self.processedImagenLabel.setGeometry(QtCore.QRect(290, 50, 201, 121))
-        self.processedImagenLabel.setText("")
-        self.processedImagenLabel.setObjectName("processedImagenLabel")
-        self.processedImagenLabel.setStyleSheet("background-color: white")
+        self.processedImageLabel = QtWidgets.QLabel(Dialog)
+        self.processedImageLabel.setGeometry(QtCore.QRect(290, 50, 201, 121))
+        self.processedImageLabel.setText("")
+        self.processedImageLabel.setObjectName("processedImageLabel")
+        self.processedImageLabel.setStyleSheet("background-color: white")
         
         self.titleProcessedImageLabel = QtWidgets.QLabel(Dialog)
         self.titleProcessedImageLabel.setGeometry(QtCore.QRect(290, -35, 201, 121))
@@ -51,21 +51,14 @@ class Ui_Dialog(object):
         self.titleProcessedImageLabel.setFont(QtGui.QFont("Arial",14,QtGui.QFont.Bold))
         self.titleProcessedImageLabel.setObjectName("titleOriginalImageLabel")
 
-
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        pixmaporig= QPixmap('sample_office.jpg').scaled(201,121)
-        self.originalImageLabel.setPixmap(pixmaporig)
-
-        pixmapprocess= QPixmap('202062255.jpg').scaled(201,121)
-        self.processedImagenLabel.setPixmap(pixmapprocess)
-
-    
     def setImage(self, imageName):
         originalImagesDirectory = 'C:\\Users\\Normandi\\Desktop\\images'
         processedImagesDirectory ='C:\\Users\\Normandi\\Desktop\\processedImages'
         self.imageName = imageName
+        print('Nombre Imagen>>>>>>',self.imageName)
         original = ''
         original += originalImagesDirectory +'\\' + imageName
         processed = ''
@@ -73,7 +66,7 @@ class Ui_Dialog(object):
         pixmaporig= QPixmap(original).scaled(201,121)
         self.originalImageLabel.setPixmap(pixmaporig)
         pixmapprocess= QPixmap(processed).scaled(201,121)
-        self.processedImagenLabel.setPixmap(pixmapprocess)
+        self.processedImageLabel.setPixmap(pixmapprocess)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
