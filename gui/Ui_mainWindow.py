@@ -10,9 +10,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog,  QMainWindow, QAction
 from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QIcon
-from Ui_aboutDialog import *
-from Ui_datesDialog import *
-from Ui_analysis import *
+from Ui_aboutDialog import Ui_Dialog
+from Ui_datesDialog import Ui_datesDialog
+from Ui_analysis import Ui_Dialog
+from logic.detection import Detection
 
 import cv2
 import os

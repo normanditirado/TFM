@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap
-from detection import Detection
+from logic.detection import Detection
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
