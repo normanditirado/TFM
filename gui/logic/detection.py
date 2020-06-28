@@ -1,10 +1,10 @@
 import enum
-from obj import ObjectDetected,Object
+from logic.obj import ObjectDetected,Object
 import math
 import cv2
 import numpy as np
-from activity import Activity
-from image import Image
+from logic.activity import Activity
+from logic.image import Image
 import json
 from collections import namedtuple
 from json import JSONEncoder
@@ -202,6 +202,29 @@ class Detection:
         width = abs(bottomRightX - upperLeftX)
         result = [height, width]
         return result
+
+    # Returns the String representation of the activity
+    def getNameOfActivity(self, activity):
+        print('Calling getNameOfActivity>>>>:')
+        print('Activity: ')
+        if (activity is Activity.reading_seated):
+            print('Leyendo sentado')
+            return 'Leyendo sentado'
+        elif (activity is Activity.typing):
+            print('Tecleando')
+            return 'Tecleando'
+        elif activity is Activity.walking:
+            print('Caminando')
+            return 'Caminando'
+        elif activity is Activity.packing:
+            print('Archivando')
+            return 'Archivando'
+        else:
+            print('Otra')
+            return 'Otra'
+            
+            
+
 
     # Prints an image processed by the function parseProcessedImage
     def printImage(imageProcessed):

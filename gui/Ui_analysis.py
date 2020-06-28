@@ -67,6 +67,8 @@ class Ui_Dialog(object):
         self.originalImageLabel.setPixmap(pixmaporig)
         pixmapprocess= QPixmap(processed).scaled(201,121)
         self.processedImageLabel.setPixmap(pixmapprocess)
+        self.processedImagePath = processed
+        self.loadResults()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -74,11 +76,36 @@ class Ui_Dialog(object):
         item = self.ResultTableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Dialog", "Actividad Realizada"))
         item = self.ResultTableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Dialog", "Tasa Metabólica"))
+        item.setText(_translate("Dialog", "Tasa Metabólica (met)"))
         
         
         for indice, ancho in enumerate((150, 130), start=0):
             self.ResultTableWidget.setColumnWidth(indice,ancho)
+
+
+   
+    # Displays results of processed image
+    def loadResults(self):
+        imageProcessed = Detection.parseProcessedImage(self.getPathOfProcessedImage())
+        a = Detection()
+        activities = a.detectActivities(imageProcessed)
+        i = 0
+        instanceOfDetection = Detection()
+        for item in activities:
+            self.ResultTableWidget.insertRow(i)
+            currentItem = QtWidgets.QTableWidgetItem(instanceOfDetection.getNameOfActivity(item))
+            currentItemValue = QtWidgets.QTableWidgetItem(str(item.value))
+            print(currentItemValue)
+            self.ResultTableWidget.setItem(i, 0, currentItem)
+            self.ResultTableWidget.setItem(i, 1, currentItemValue)
+            i += 1
+
+
+    # Returns the path of the processed image displayed
+    def getPathOfProcessedImage(self):
+        return self.processedImagePath
+
+
 
 
 if __name__ == "__main__":

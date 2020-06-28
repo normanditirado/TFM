@@ -10,7 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog,  QMainWindow, QAction
 from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QIcon
-from Ui_aboutDialog import Ui_Dialog
+from Ui_aboutDialog import Ui_AboutDialog
 from Ui_datesDialog import Ui_datesDialog
 from Ui_analysis import Ui_Dialog
 from logic.detection import Detection
@@ -119,7 +119,7 @@ class Ui_MainWindow(object):
     def showHelp(self):
         print('Calling showHelp>>>>>>>>>>>>')
         dialog = Dialog(MainWindow)
-        about = Ui_Dialog()
+        about = Ui_AboutDialog()
         about.setupUi(dialog)
         dialog.show()
         rsp = dialog.exec_()
