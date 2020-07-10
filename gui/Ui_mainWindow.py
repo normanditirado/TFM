@@ -85,6 +85,7 @@ class Ui_MainWindow(object):
                 self.photosTableWidget.setItem(m, n, newitem)
         self.photosTableWidget.setHorizontalHeaderLabels(horHeaders)
         self.photosTableWidget.show() '''
+    
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -149,7 +150,8 @@ class Ui_MainWindow(object):
     def loadNamesOfImagesFromDirectory(self, images):
         i = 0
         for item in images:
-            currentImageName = QtWidgets.QTableWidgetItem(item)
+            image = QIcon("202006201830.jpg")
+            currentImageName = QtWidgets.QTableWidgetItem(image, item)
             self.photosTableWidget.setItem(i, 0, currentImageName)
             i+=1
 
@@ -202,7 +204,9 @@ class Ui_MainWindow(object):
         about.setupUi(dialog)
         about.setImage(imageName)
         dialog.show()
-        
+    
+
+
 
 class Dialog(QDialog):
     def __init__(self, *args, **kwargs):
