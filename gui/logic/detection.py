@@ -87,9 +87,19 @@ class Detection:
         print(matrixOfMarksOfProximity)       
         return activities
 
-    # Returns True if two objects are close to each other (TODO)
+    # Returns True if two objects are close to each other
+    # distanceBetweenTwoObjects is less than 10% of average between imageHeight and imageWidth 
     def areClose(self, imageHeight, imageWidth, distanceBetweenTwoObjects):
-        return True
+        averageOfImageSize = (imageHeight + imageWidth)/2
+        if distanceBetweenTwoObjects >= averageOfImageSize:
+            return False
+        else:
+            percentageOf10 = (10/1000) * averageOfImageSize
+            if distanceBetweenTwoObjects < percentageOf10:
+                return True
+            else:
+                return False
+            
 
     # Returns the Activity performed by a person that is close to several objects
     def getActivityPerformed(self, rowOfMatrixOfMarksOfProximity, objectsCloseToAPerson):

@@ -148,11 +148,18 @@ class Ui_MainWindow(object):
         return filteredFiles
 
     def loadNamesOfImagesFromDirectory(self, images):
+        self.photosTableWidget.setRowHeight(0, 340)
         i = 0
         for item in images:
             image = QIcon("202006201830.jpg")
             currentImageName = QtWidgets.QTableWidgetItem(image, item)
+            # self.photosTableWidget.setRowHeight()
+            pixmap = QtGui.QPixmap("202006201830.jpg")
+            labelImg = QtWidgets.QLabel()
+            labelImg.setPixmap(pixmap)
             self.photosTableWidget.setItem(i, 0, currentImageName)
+            self.photosTableWidget.setCellWidget(i, 1, labelImg)
+            self.photosTableWidget.scrollToItem(self.photosTableWidget.itemAt(i, 1))
             i+=1
 
     def getDataFromSelectedRow(self):

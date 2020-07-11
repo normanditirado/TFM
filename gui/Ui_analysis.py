@@ -14,9 +14,9 @@ from logic.detection import Detection
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(588, 450)
+        Dialog.resize(700, 500)
         self.originalImageLabel = QtWidgets.QLabel(Dialog)
-        self.originalImageLabel.setGeometry(QtCore.QRect(40, 50, 201, 121))
+        self.originalImageLabel.setGeometry(QtCore.QRect(40, 50, 300, 200))
         self.originalImageLabel.setText("")
         self.originalImageLabel.setStyleSheet("background-color: white")
         self.originalImageLabel.setObjectName("originalImageLabel")
@@ -29,7 +29,7 @@ class Ui_Dialog(object):
         self.originalImageLabel.setObjectName("titleOriginalImageLabel")
 
         self.ResultTableWidget = QtWidgets.QTableWidget(Dialog)
-        self.ResultTableWidget.setGeometry(QtCore.QRect(50, 230, 290, 161))
+        self.ResultTableWidget.setGeometry(QtCore.QRect(200, 270, 290, 161))
         self.ResultTableWidget.setObjectName("ResultTableWidget")
         self.ResultTableWidget.setColumnCount(2)
         self.ResultTableWidget.setRowCount(0)
@@ -39,7 +39,7 @@ class Ui_Dialog(object):
         self.ResultTableWidget.setHorizontalHeaderItem(1, item)
         
         self.processedImageLabel = QtWidgets.QLabel(Dialog)
-        self.processedImageLabel.setGeometry(QtCore.QRect(290, 50, 201, 121))
+        self.processedImageLabel.setGeometry(QtCore.QRect(370, 50, 300, 200))
         self.processedImageLabel.setText("")
         self.processedImageLabel.setObjectName("processedImageLabel")
         self.processedImageLabel.setStyleSheet("background-color: white")
@@ -63,9 +63,9 @@ class Ui_Dialog(object):
         original += originalImagesDirectory +'\\' + imageName
         processed = ''
         processed += processedImagesDirectory + '\\' + imageName
-        pixmaporig= QPixmap(original).scaled(201,121)
+        pixmaporig= QPixmap(original).scaled(300,200)
         self.originalImageLabel.setPixmap(pixmaporig)
-        pixmapprocess= QPixmap(processed).scaled(201,121)
+        pixmapprocess= QPixmap(processed).scaled(300,200)
         self.processedImageLabel.setPixmap(pixmapprocess)
         self.processedImagePath = processed
         self.loadResults()
